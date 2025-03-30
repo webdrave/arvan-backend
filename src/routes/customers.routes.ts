@@ -19,6 +19,8 @@ router.post("/address", authenticateJWT,customersController.addAddress);
 
 router.get("/address", authenticateJWT,customersController.getAddress);
 
+router.get("/address/:id", authenticateJWT, customersController.getAddressById);
+
 router.post("/otp" ,customersController.getOtpByNumber);
 
 router.post(`/resend-otp` ,customersController.getOtpByJwt);
