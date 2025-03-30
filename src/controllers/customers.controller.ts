@@ -96,6 +96,20 @@ const allCustomers = async (
   res.status(HttpStatusCodes.OK).json({ success: true, updatedCustomer });
 };
 
+const getAddressById = async (req: Request, res: Response, next: NextFunction) =>{
+  const { id } = req.params;
+
+  if (!id) {
+    throw new RouteError(HttpStatusCodes.BAD_REQUEST, "Missing address id");
+  }
+
+  const address = await prisma.address.findUnique({
+    where: { id },
+  });
+
+  res.status(HttpStatusCodes.OK).json({ success: true, address });
+  
+}
 
 const getCustomer = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.user;
@@ -502,6 +516,7 @@ export default {
   verfy_otp,
   makeAdmin,
   getCustomer,
+  getAddressById
 
 
 };
